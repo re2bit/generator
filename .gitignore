@@ -1,0 +1,4 @@
+vendor/*
+.idea
+.Output
+.DS_Store

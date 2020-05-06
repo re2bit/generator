@@ -1,0 +1,56 @@
+{
+  "name": "Re2bit",
+  "useNamespace": true,
+  "modules": [
+    {
+      "name": "Report",
+      "layout": "tab",
+      "resources": [
+        {
+          "name": "Report",
+          "icon": "icon-32",
+          "associations": [],
+          "fields": [
+            {
+              "name": "CsvData",
+              "type": "string",
+              "validators": [
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": false,
+              "description": "Csv Data which replaces the current data",
+              "translations": [
+                {
+                  "language": "de",
+                  "name": "Csv Daten",
+                  "description": "Csv Daten welche die aktuellen Daten ersetzen"
+                }
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": "show"
+            },
+            {
+              "type": "index"
+            },
+            {
+              "type": "update"
+            },
+            {
+              "type": "delete"
+            },
+            {
+              "type": "create"
+            }
+          ]
+        }
+      ],
+      "operations": [
+      ]
+    }
+  ]
+}
