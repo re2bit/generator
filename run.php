@@ -1,13 +1,11 @@
 <?php
 
-if (!is_dir(__DIR__ . '/vendor')) {
-    echo 'Dependencies not found !' . PHP_EOL;
-    echo 'Installing Dependencies:' . PHP_EOL;
-    system('composer install');
-}
-if (!is_dir(__DIR__ . '/vendor')) {
-    echo 'Error while Installation:' . PHP_EOL;
-    die();
+if (file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
+    include_once __DIR__ . '/../../../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    include_once __DIR__ . '/vendor/autoload.php';
+} else {
+    throw new RuntimeException('Error: vendor/autoload.php could not be found.');
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
