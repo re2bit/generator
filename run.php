@@ -8,8 +8,6 @@ if (file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
     throw new RuntimeException('Error: vendor/autoload.php could not be found.');
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
-
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Re2bit\Generator\Commands\CreateCommand;
 use \Re2bit\Generator\Commands\ClearCommand;
