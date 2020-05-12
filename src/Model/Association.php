@@ -55,7 +55,7 @@ class Association extends AbstractModel
 
     /**
      * @Serializer\Exclude()
-     * @var Resource
+     * @var ResourceModel
      */
     public $resource;
 

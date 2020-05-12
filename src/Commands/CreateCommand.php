@@ -5,15 +5,16 @@ namespace Re2bit\Generator\Commands;
 use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationReader;
 use DomainException;
-use Re2bit\Generator\Adapter\GeneratorInterface;
-use Re2bit\Generator\Twig\Renderer;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
+use Re2bit\Generator\Adapter\GeneratorInterface;
 use Re2bit\Generator\Model\Namensraum;
+use Re2bit\Generator\Twig\Renderer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
@@ -26,11 +27,14 @@ class CreateCommand extends AbstractCommand
 
     protected static $defaultName = 'generator:create';
 
-    /** @var SerializerInterface  */
+    /** @var SerializerInterface */
     private $serializer;
-   /** @var RecursiveValidator|ValidatorInterface  */
+    /** @var RecursiveValidator|ValidatorInterface */
     private $validator;
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         parent::configure();
@@ -48,19 +52,22 @@ class CreateCommand extends AbstractCommand
     protected function execute(
         InputInterface $input,
         OutputInterface $output
-    ) {
-        $output->write(file_get_contents(__DIR__ . '/logo'));
+    )
+    {
+        $output->write($this->getLogo());
         $output->writeln('');
 
         $dataFile = $input->getOption(self::INPUT_OPTION_DATA_FILE);
 
         $jsonString = null;
-        if ($dataFile && !is_array($dataFile) && file_exists(realpath($dataFile))) {
-            $jsonString = file_get_contents(realpath($dataFile));
+        if ($dataFile && is_string($dataFile) && file_exists((string)realpath($dataFile)))
+        {
+            $jsonString = file_get_contents((string) realpath($dataFile));
         }
 
-        if (!$dataFile || !$jsonString) {
-            throw new \DomainException('Config File not Found');
+        if (!$dataFile || !$jsonString)
+        {
+            throw new DomainException('Config File not Found');
         }
 
         /** @var Namensraum $namespace */
@@ -68,7 +75,12 @@ class CreateCommand extends AbstractCommand
         $errors = $this->validator->validate($namespace);
         if (count($errors) >= 1)
         {
-            throw new DomainException((string) $errors);
+            if ($errors instanceof ConstraintViolationList)
+            {
+                throw new DomainException($errors->__toString());
+            }
+            throw new DomainException('Validation failed');
+
         }
 
         foreach ($namespace->modules as $module)
@@ -79,10 +91,7 @@ class CreateCommand extends AbstractCommand
                 $generator = new $class(
                     $module,
                     new Renderer(
-                        $outputDir,
-                        $class::TEMPLATES,
-                        null,
-                        $output
+                        $outputDir, $output, $class::TEMPLATES, null
                     ),
                     null
                 );
@@ -90,7 +99,8 @@ class CreateCommand extends AbstractCommand
             }
         }
         $output->writeln('Done');
-        $output->write(file_get_contents(__DIR__ . '/foot'));
+        $output->write($this->getFooter());
+        return 0;
     }
 
     /**

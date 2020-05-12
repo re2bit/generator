@@ -49,7 +49,7 @@ class Operation extends AbstractModel
     public $description;
 
     /**
-     * @var ArrayCollection&Action[]
+     * @var ArrayCollection<int, Translation>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Translation>")
      */

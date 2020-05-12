@@ -9,6 +9,9 @@ class Layout
 {
     const TAB = 'tab';
 
+    /**
+     * @return array<string>
+     */
     public static function validValues() : array
     {
         return [

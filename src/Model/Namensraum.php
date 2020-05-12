@@ -28,7 +28,7 @@ class Namensraum extends AbstractModel
     public $useNamespace;
 
     /**
-     * @var Module[]|ArrayCollection
+     * @var ArrayCollection<int, Module>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Module>")
      */
@@ -36,15 +36,15 @@ class Namensraum extends AbstractModel
 
     /**
      * @Assert\Valid()
-     * @var Associations|ArrayCollection|Association[]
+     * @var Associations
      */
     private $associationCollection;
 
     /**
      * Namensraum constructor.
      *
-     * @param string                   $name
-     * @param ArrayCollection|Module[] $modules
+     * @param string                       $name
+     * @param ArrayCollection<int, Module> $modules
      */
     public function __construct(string $name, ArrayCollection $modules)
     {
@@ -76,12 +76,12 @@ class Namensraum extends AbstractModel
         });
     }
 
-    private function initAssociations()
+    private function initAssociations(): void
     {
         $this->associationCollection = new Associations();
         $this->modules->map(function (Module $module)
         {
-            $module->resources->map(function (Resource $resource) use ($module)
+            $module->resources->map(function (ResourceModel $resource) use ($module)
             {
                 $resource->associations->map(function (Association $association) use ($module, $resource)
                 {

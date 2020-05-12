@@ -26,14 +26,16 @@ class Renderer
 
     public function __construct(
         string $outputDirectory,
+        OutputInterface $output,
         string $templateDirectory = __DIR__ . '/views',
-        Environment $twig = null,
-        OutputInterface $output = null
-    ) {
-        if (!$twig) {
+        Environment $twig = null
+    )
+    {
+        if (!$twig)
+        {
             $loader = new FilesystemLoader([$templateDirectory]);
             $twig = new Environment($loader, [
-                'autoescape' => false
+                'autoescape' => false,
             ]);
         }
         $this->twig = $twig;
@@ -43,8 +45,8 @@ class Renderer
     }
 
     /**
-     * @param string $template
-     * @param array  $variables
+     * @param string  $template
+     * @param mixed[] $variables
      *
      * @return string
      * @throws LoaderError
@@ -55,29 +57,34 @@ class Renderer
     {
         $twigTpl = $this->twig->load($template);
         $data = $this->twig->render($twigTpl, $variables);
+
         return $data;
     }
 
+    /**
+     * @param array<string, mixed> $fileSystem
+     * @param string|null          $baseDir
+     *
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function renderToFilesystem(array $fileSystem, $baseDir = null)
     {
         $baseDir = $baseDir ?? $this->outputDirectory;
-        foreach ($fileSystem as $key => $value) {
-            if (isset($value['template'])) {
-                if ($this->output) {
-                    $this->output->writeln('r: ' . $value['template']);
-                }
+        foreach ($fileSystem as $key => $value)
+        {
+            if (isset($value['template']))
+            {
+                $this->output->writeln('r: ' . $value['template']);
                 $data = $this->render($value['template'], $value['variables']);
-                file_put_contents(
-                    $baseDir . DIRECTORY_SEPARATOR . $key,
-                    $data
-                );
-                if ($this->output) {
-                    $lines = substr_count($data, PHP_EOL);
-                    $this->output->writeln('w: ' . $key . ' - written ' . $lines . ' Lines');
-                }
+                file_put_contents($baseDir . DIRECTORY_SEPARATOR . $key, $data);
+                $lines = substr_count($data, PHP_EOL);
+                $this->output->writeln('w: ' . $key . ' - written ' . $lines . ' Lines');
                 continue;
             }
-            $dir = $baseDir . DIRECTORY_SEPARATOR . $key ;
+            $dir = $baseDir . DIRECTORY_SEPARATOR . $key;
             if (!is_dir($dir) && !mkdir($dir) && !is_dir($dir))
             {
                 throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));

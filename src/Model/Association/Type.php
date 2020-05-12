@@ -21,6 +21,9 @@ class Type
         self::MANY_TO_MANY => self::MANY_TO_MANY
     ];
 
+    /**
+     * @return array<string>
+     */
     public static function validValues() : array
     {
         return [

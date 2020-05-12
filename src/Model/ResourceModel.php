@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @author Rene Gerritsen <rene.gerritsen@me.com>
  */
-class Resource extends AbstractModel
+class ResourceModel extends AbstractModel
 {
     /**
      * @var string
@@ -33,21 +33,21 @@ class Resource extends AbstractModel
     public $icon;
 
     /**
-     * @var ArrayCollection|Association[]
+     * @var ArrayCollection<int, Association>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Association>")
      */
     public $associations;
 
     /**
-     * @var ArrayCollection|Action[]
+     * @var ArrayCollection<int, Action>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Field>")
      */
     public $fields;
 
     /**
-     * @var ArrayCollection|Action[]
+     * @var ArrayCollection<int, Action>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Action>")
      */

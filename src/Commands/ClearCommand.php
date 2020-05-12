@@ -13,7 +13,7 @@ class ClearCommand extends AbstractCommand
         InputInterface $input,
         OutputInterface $output
     ) {
-        $output->write(file_get_contents(__DIR__ . '/logo'));
+        $output->write($this->getLogo());
         $output->writeln('clear Output');
         foreach ($this->adapters as $adapter => $outputPath) {
             $output->writeln('clear Output for "' . $adapter . '" : "' . $outputPath . '"');
@@ -25,5 +25,6 @@ class ClearCommand extends AbstractCommand
         }
 
         $output->writeln('done');
+        return 0;
     }
 }

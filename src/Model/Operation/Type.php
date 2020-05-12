@@ -10,6 +10,9 @@ class Type
     const MULTI_RESOURCE = 'multi_resource';
     const SINGLE_RESOURCE = 'single_resource';
 
+    /**
+     * @return array<string>
+     */
     public static function validValues() : array
     {
         return [

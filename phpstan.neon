@@ -1,0 +1,8 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+parameters:
+    paths:
+        - src
+    excludes_analyse:
+        - vendor/*
+        - src/Config/config.php

@@ -3,6 +3,8 @@
 namespace Re2bit\Generator\Mapping;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use DomainException;
 use Re2bit\Generator\Model\Field as BaseField;
 use Re2bit\Generator\Model\Validator;
 
@@ -56,7 +58,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForExtJsForm(string $type)
+    public static function mapForExtJsForm(string $type): string
     {
         $types = [
             'string'  => 'textfield',
@@ -194,9 +196,10 @@ class Field
             case "null":
                 return '@NullableAnnotation()';
         }
+        throw new DomainException('Invalid Type given', 1589271644693);
     }
 
-    public static function mapForFakerType(string $type)
+    public static function mapForFakerType(string $type): string
     {
         $types = [
             'pk'      => 'randomNumber',
@@ -211,21 +214,36 @@ class Field
         return $types[$type];
     }
 
-    public static function removePk(ArrayCollection $fields)
+    /**
+     * @param ArrayCollection<int, BaseField> $fields
+     *
+     * @return Collection<int, BaseField>
+     */
+    public static function removePk(ArrayCollection $fields): Collection
     {
         return $fields->filter(function (BaseField $field) {
             return $field->type !== 'pk';
         });
     }
 
-    public static function removeDates(ArrayCollection $fields)
+    /**
+     * @param ArrayCollection<int, BaseField> $fields
+     *
+     * @return Collection<int, BaseField>
+     */
+    public static function removeDates(ArrayCollection $fields): Collection
     {
         return $fields->filter(function (BaseField $field) {
             return $field->name !== 'created' && $field->name !== 'updated';
         });
     }
 
-    public static function removeNullable(ArrayCollection $validators)
+    /**
+     * @param ArrayCollection<int, Validator> $validators
+     *
+     * @return Collection<int, Validator>
+     */
+    public static function removeNullable(ArrayCollection $validators): Collection
     {
         return $validators->filter(function (Validator $validator) {
             return $validator->type !== 'null';

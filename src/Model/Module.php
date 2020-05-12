@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Module extends AbstractModel
 {
     /**
-     * @var ArrayCollection|Resource[]
+     * @var ArrayCollection<int, ResourceModel>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Resource>")
      * @Assert\NotNull()
@@ -20,7 +20,7 @@ class Module extends AbstractModel
     public $resources;
 
     /**
-     * @var ArrayCollection|Operation[]
+     * @var ArrayCollection<int, Operation>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Operation>")
      */
@@ -44,6 +44,13 @@ class Module extends AbstractModel
     /** @var Namensraum */
     public $namespace;
 
+    /**
+     * Module constructor.
+     *
+     * @param string                              $name
+     * @param ArrayCollection<int, ResourceModel> $resources
+     * @param ArrayCollection<int, Operation>     $operations
+     */
     public function __construct(
         string $name,
         ArrayCollection $resources,
@@ -57,10 +64,10 @@ class Module extends AbstractModel
 
     /**
      * @Serializer\PostDeserialize()
-     * @internal
      * @return void
+     * @internal
      */
-    public function postDeserialize(): void
+    public function postDeserialize() : void
     {
         $this->resources = $this->resources ?? new ArrayCollection();
         $this->actions = $this->actions ?? new ArrayCollection();

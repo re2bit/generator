@@ -15,6 +15,9 @@ class Type
     const MASS_UPDATE = 'mass_update';
     const MASS_DELETE = 'mass_delete';
 
+    /**
+     * @return array<string>
+     */
     public static function validValues() : array
     {
         return [

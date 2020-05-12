@@ -26,7 +26,7 @@ class Field extends AbstractModel
     public $type;
 
     /**
-     * @var ArrayCollection&Validator[]
+     * @var ArrayCollection<int, Validator>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Validator>")
      */
@@ -55,7 +55,7 @@ class Field extends AbstractModel
     public $disabledInGrid;
 
     /**
-     * @var ArrayCollection&Action[]
+     * @var ArrayCollection<int, Translation>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Translation>")
      */
@@ -64,23 +64,24 @@ class Field extends AbstractModel
     /**
      * Field constructor.
      *
-     * @param string                      $name
-     * @param string                      $type
-     * @param ArrayCollection&Validator[] $validators
-     * @param bool                        $nullable
-     * @param string                      $description
-     * @param bool                        $disabledInGrid
-     * @param ArrayCollection&Action[]    $translations
+     * @param string                            $name
+     * @param string                            $type
+     * @param ArrayCollection<int,Validator>    $validators
+     * @param bool                              $nullable
+     * @param string                            $description
+     * @param bool                              $disabledInGrid
+     * @param ArrayCollection<int, Translation> $translations
      */
     public function __construct(
         string $name,
         string $type,
-        $validators,
+        ArrayCollection $validators,
         bool $nullable,
         string $description,
         bool $disabledInGrid,
-        $translations
-    ) {
+        ArrayCollection $translations
+    )
+    {
         $this->name = $name;
         $this->type = $type;
         $this->validators = $validators;
@@ -93,7 +94,7 @@ class Field extends AbstractModel
     /**
      * @return bool
      */
-    public function isId(): bool
+    public function isId() : bool
     {
         return $this->type === 'pk';
     }

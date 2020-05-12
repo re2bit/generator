@@ -8,10 +8,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author    Rene Gerritsen <rene.gerritsen@me.com>
+ *
+ * @extends ArrayCollection<int, Association>
  */
 class Associations extends ArrayCollection
 {
-    public function addAssociation(Association $association)
+    public function addAssociation(Association $association): void
     {
         $this->add($association);
     }
@@ -19,7 +21,7 @@ class Associations extends ArrayCollection
     /**
      * @Assert\Callback()
      */
-    public function isValid(ExecutionContextInterface $context, $payload) : void
+    public function isValid(ExecutionContextInterface $context) : void
     {
         $resources = $this->map(function (Association $association) {
            return $association->resource->name . '-' . $association->type;
