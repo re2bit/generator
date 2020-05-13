@@ -16,15 +16,15 @@ class Type
 
     /** @var string[] */
     public const INVERSE = [
-        self::ONE_TO_MANY => self::MANY_TO_ONE,
-        self::MANY_TO_ONE => self::ONE_TO_MANY,
-        self::MANY_TO_MANY => self::MANY_TO_MANY
+        self::ONE_TO_MANY  => self::MANY_TO_ONE,
+        self::MANY_TO_ONE  => self::ONE_TO_MANY,
+        self::MANY_TO_MANY => self::MANY_TO_MANY,
     ];
 
     /**
      * @return array<string>
      */
-    public static function validValues() : array
+    public static function validValues(): array
     {
         return [
             self::MANY_TO_ONE,

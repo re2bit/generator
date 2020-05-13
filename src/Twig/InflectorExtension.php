@@ -65,7 +65,7 @@ class InflectorExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'map_jms',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForJms($string);
                 }
             ),
@@ -77,31 +77,31 @@ class InflectorExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'map_extjs',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForExtJs($string);
                 }
             ),
             new TwigFilter(
                 'map_extjs_form',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForExtJsForm($string);
                 }
             ),
             new TwigFilter(
                 'map_xtype',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForXType($string);
                 }
             ),
             new TwigFilter(
                 'map_grid_filter',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForGridFilter($string);
                 }
             ),
             new TwigFilter(
                 'map_grid_format',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForGridFormat($string);
                 }
             ),
@@ -113,25 +113,25 @@ class InflectorExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'map_php',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForPHP($string);
                 }
             ),
             new TwigFilter(
                 'map_php_cast',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForPhpCast($string);
                 }
             ),
             new TwigFilter(
                 'map_http_method',
-                 function (string $string) {
+                function (string $string) {
                     return Action::mapHttpMethod($string);
                 }
             ),
-             new TwigFilter(
+            new TwigFilter(
                 'map_hobo_validator',
-                 function (string $string) {
+                function (string $string) {
                     return Field::mapForHoboValidator($string);
                 }
             ),
@@ -161,7 +161,7 @@ class InflectorExtension extends AbstractExtension
             new TwigFilter(
                 'only_many_to_one',
                 function (ArrayCollection $associations) {
-                    return $associations->filter(function(Association $association){
+                    return $associations->filter(function (Association $association) {
                         return $association->isManyToOne();
                     });
                 }
@@ -169,7 +169,7 @@ class InflectorExtension extends AbstractExtension
             new TwigFilter(
                 'only_one_to_many',
                 function (ArrayCollection $associations) {
-                    return $associations->filter(function(Association $association){
+                    return $associations->filter(function (Association $association) {
                         return $association->isOneToMany();
                     });
                 }

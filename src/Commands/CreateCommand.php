@@ -52,46 +52,41 @@ class CreateCommand extends AbstractCommand
     protected function execute(
         InputInterface $input,
         OutputInterface $output
-    )
-    {
+    ) {
         $output->write($this->getLogo());
         $output->writeln('');
 
         $dataFile = $input->getOption(self::INPUT_OPTION_DATA_FILE);
 
         $jsonString = null;
-        if ($dataFile && is_string($dataFile) && file_exists((string)realpath($dataFile)))
-        {
+        if ($dataFile && is_string($dataFile) && file_exists((string)realpath($dataFile))) {
             $jsonString = file_get_contents((string) realpath($dataFile));
         }
 
-        if (!$dataFile || !$jsonString)
-        {
+        if (!$dataFile || !$jsonString) {
             throw new DomainException('Config File not Found');
         }
 
         /** @var Namensraum $namespace */
         $namespace = $this->serializer->deserialize($jsonString, Namensraum::class, 'json');
         $errors = $this->validator->validate($namespace);
-        if (count($errors) >= 1)
-        {
-            if ($errors instanceof ConstraintViolationList)
-            {
+        if (count($errors) >= 1) {
+            if ($errors instanceof ConstraintViolationList) {
                 throw new DomainException($errors->__toString());
             }
             throw new DomainException('Validation failed');
-
         }
 
-        foreach ($namespace->modules as $module)
-        {
-            foreach ($this->adapters as $class => $outputDir)
-            {
+        foreach ($namespace->modules as $module) {
+            foreach ($this->adapters as $class => $outputDir) {
                 /** @var GeneratorInterface $generator */
                 $generator = new $class(
                     $module,
                     new Renderer(
-                        $outputDir, $output, $class::TEMPLATES, null
+                        $outputDir,
+                        $output,
+                        $class::TEMPLATES,
+                        null
                     ),
                     null
                 );
@@ -116,8 +111,8 @@ class CreateCommand extends AbstractCommand
     /**
      * Validator Factory Method
      *
-     * @return RecursiveValidator|ValidatorInterface
      * @throws AnnotationException
+     * @return RecursiveValidator|ValidatorInterface
      */
     private function createValidator()
     {
@@ -133,7 +128,7 @@ class CreateCommand extends AbstractCommand
      *
      * @return SerializerInterface
      */
-    private function createSerializer() : SerializerInterface
+    private function createSerializer(): SerializerInterface
     {
         return SerializerBuilder::create()
             ->addDefaultDeserializationVisitors()

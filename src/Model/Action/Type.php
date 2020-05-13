@@ -18,7 +18,7 @@ class Type
     /**
      * @return array<string>
      */
-    public static function validValues() : array
+    public static function validValues(): array
     {
         return [
             self::INDEX,
@@ -27,7 +27,7 @@ class Type
             self::DELETE,
             self::CREATE,
             self::MASS_UPDATE,
-            self::MASS_DELETE
+            self::MASS_DELETE,
         ];
     }
 }

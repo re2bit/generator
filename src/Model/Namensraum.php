@@ -57,7 +57,7 @@ class Namensraum extends AbstractModel
      * @Serializer\PostDeserialize()
      * @return void
      */
-    public function init() : void
+    public function init(): void
     {
         $this->initNamespace();
         $this->initAssociations();
@@ -68,10 +68,9 @@ class Namensraum extends AbstractModel
      *
      * @return void
      */
-    private function initNamespace() : void
+    private function initNamespace(): void
     {
-        $this->modules->map(function (Module $module)
-        {
+        $this->modules->map(function (Module $module) {
             $module->namespace = $this;
         });
     }
@@ -79,12 +78,9 @@ class Namensraum extends AbstractModel
     private function initAssociations(): void
     {
         $this->associationCollection = new Associations();
-        $this->modules->map(function (Module $module)
-        {
-            $module->resources->map(function (ResourceModel $resource) use ($module)
-            {
-                $resource->associations->map(function (Association $association) use ($module, $resource)
-                {
+        $this->modules->map(function (Module $module) {
+            $module->resources->map(function (ResourceModel $resource) use ($module) {
+                $resource->associations->map(function (Association $association) use ($module, $resource) {
                     $association->module = $module;
                     $association->resource = $resource;
                     $this->associationCollection->addAssociation($association);

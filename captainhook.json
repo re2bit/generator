@@ -1,0 +1,32 @@
+{
+    "pre-push": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "composer test",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+                "options": [],
+                "conditions": []
+            }
+        ]
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "composer test",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+                "options": [],
+                "conditions": []
+            }
+        ]
+    }
+}

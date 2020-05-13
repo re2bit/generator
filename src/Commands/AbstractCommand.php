@@ -24,7 +24,7 @@ abstract class AbstractCommand extends Command
      *
      * @return array<string,string>
      */
-    protected function createAdapterConfig(InputInterface $input) : array
+    protected function createAdapterConfig(InputInterface $input): array
     {
         $file = $input->getOption(self::INPUT_OPTION_CONFIG_FILE);
 
@@ -61,7 +61,7 @@ abstract class AbstractCommand extends Command
             InputOption::VALUE_REQUIRED
         );
         $inputDefinition = new InputDefinition([
-            $option
+            $option,
         ]);
 
         $this->setDefinition($inputDefinition);

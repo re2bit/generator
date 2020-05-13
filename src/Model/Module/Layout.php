@@ -12,10 +12,10 @@ class Layout
     /**
      * @return array<string>
      */
-    public static function validValues() : array
+    public static function validValues(): array
     {
         return [
-            self::TAB
+            self::TAB,
         ];
     }
 }

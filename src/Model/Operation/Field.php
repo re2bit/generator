@@ -82,8 +82,7 @@ class Field extends AbstractField
         string $description,
         bool $disabledInGrid,
         $translations
-    )
-    {
+    ) {
         $this->name = $name;
         $this->type = $type;
         $this->validators = $validators;
@@ -96,7 +95,7 @@ class Field extends AbstractField
     /**
      * @return bool
      */
-    public function isId() : bool
+    public function isId(): bool
     {
         return $this->type === 'pk';
     }

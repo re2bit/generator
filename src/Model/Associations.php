@@ -21,14 +21,14 @@ class Associations extends ArrayCollection
     /**
      * @Assert\Callback()
      */
-    public function isValid(ExecutionContextInterface $context) : void
+    public function isValid(ExecutionContextInterface $context): void
     {
         $resources = $this->map(function (Association $association) {
-           return $association->resource->name . '-' . $association->type;
+            return $association->resource->name . '-' . $association->type;
         });
-        $this->map(function (Association $association) use ($resources, $context){
+        $this->map(function (Association $association) use ($resources, $context) {
             $inverse = $association->target . '-' . $association->getInverse();
-            if(!$resources->contains($inverse)) {
+            if (!$resources->contains($inverse)) {
                 $context->buildViolation('Association Target for Resource ' . $association->resource->name . ' not present')
                 ->atPath($association->resource->name . ' to ' . $association->target)
                 ->addViolation();
@@ -36,5 +36,3 @@ class Associations extends ArrayCollection
         });
     }
 }
-
-

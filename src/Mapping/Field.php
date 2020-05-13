@@ -13,7 +13,7 @@ use Re2bit\Generator\Model\Validator;
  */
 class Field
 {
-    public static function mapForPHP(string $type) : string
+    public static function mapForPHP(string $type): string
     {
         $types = [
             'pk'      => 'int',
@@ -28,7 +28,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForPhpCast(string $type) : string
+    public static function mapForPhpCast(string $type): string
     {
         $types = [
             'pk'      => '(int)',
@@ -43,7 +43,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForExtJs(string $type) : string
+    public static function mapForExtJs(string $type): string
     {
         $types = [
             'pk'      => 'int',
@@ -72,7 +72,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForJms(string $type) : string
+    public static function mapForJms(string $type): string
     {
         $types = [
             'pk'      => 'int',
@@ -87,7 +87,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForMysql(string $type) : string
+    public static function mapForMysql(string $type): string
     {
         $types = [
             'pk'      => 'INT',
@@ -102,7 +102,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForXType(string $type) : string
+    public static function mapForXType(string $type): string
     {
         $types = [
             'pk'      => 'numbercolumn',
@@ -117,7 +117,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForGridFormat(string $type) : string
+    public static function mapForGridFormat(string $type): string
     {
         $types = [
             'pk'      => "format:'0',",
@@ -132,7 +132,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForFormFormat(string $type) : string
+    public static function mapForFormFormat(string $type): string
     {
         $types = [
             'pk'      => '',
@@ -147,7 +147,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForGridFilter(string $type) : string
+    public static function mapForGridFilter(string $type): string
     {
         $types = [
             'pk'      => 'number',
@@ -162,7 +162,7 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForDoctrine(string $type) : string
+    public static function mapForDoctrine(string $type): string
     {
         $types = [
             'pk'      => 'integer',
@@ -177,10 +177,9 @@ class Field
         return $types[$type];
     }
 
-    public static function mapForHoboValidator(string $type) : string
+    public static function mapForHoboValidator(string $type): string
     {
-        switch ($type)
-        {
+        switch ($type) {
             case 'string':
                 return '@StringAnnotation()';
             case 'integer':

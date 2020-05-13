@@ -29,10 +29,8 @@ class Renderer
         OutputInterface $output,
         string $templateDirectory = __DIR__ . '/views',
         Environment $twig = null
-    )
-    {
-        if (!$twig)
-        {
+    ) {
+        if (!$twig) {
             $loader = new FilesystemLoader([$templateDirectory]);
             $twig = new Environment($loader, [
                 'autoescape' => false,
@@ -48,12 +46,12 @@ class Renderer
      * @param string  $template
      * @param mixed[] $variables
      *
-     * @return string
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @return string
      */
-    public function render(string $template, array $variables = []) : string
+    public function render(string $template, array $variables = []): string
     {
         $twigTpl = $this->twig->load($template);
         $data = $this->twig->render($twigTpl, $variables);
@@ -65,18 +63,16 @@ class Renderer
      * @param array<string, mixed> $fileSystem
      * @param string|null          $baseDir
      *
-     * @return void
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @return void
      */
     public function renderToFilesystem(array $fileSystem, $baseDir = null)
     {
         $baseDir = $baseDir ?? $this->outputDirectory;
-        foreach ($fileSystem as $key => $value)
-        {
-            if (isset($value['template']))
-            {
+        foreach ($fileSystem as $key => $value) {
+            if (isset($value['template'])) {
                 $this->output->writeln('r: ' . $value['template']);
                 $data = $this->render($value['template'], $value['variables']);
                 file_put_contents($baseDir . DIRECTORY_SEPARATOR . $key, $data);
@@ -85,8 +81,7 @@ class Renderer
                 continue;
             }
             $dir = $baseDir . DIRECTORY_SEPARATOR . $key;
-            if (!is_dir($dir) && !mkdir($dir) && !is_dir($dir))
-            {
+            if (!is_dir($dir) && !mkdir($dir) && !is_dir($dir)) {
                 throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
             }
             $this->renderToFilesystem($value, $baseDir . DIRECTORY_SEPARATOR . $key);

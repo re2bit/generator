@@ -55,8 +55,7 @@ class Module extends AbstractModel
         string $name,
         ArrayCollection $resources,
         ArrayCollection $operations
-    )
-    {
+    ) {
         $this->resources = $resources;
         $this->actions = $operations;
         $this->name = $name;
@@ -67,7 +66,7 @@ class Module extends AbstractModel
      * @return void
      * @internal
      */
-    public function postDeserialize() : void
+    public function postDeserialize(): void
     {
         $this->resources = $this->resources ?? new ArrayCollection();
         $this->actions = $this->actions ?? new ArrayCollection();

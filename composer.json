@@ -11,8 +11,12 @@
     "symfony/process": "^3.1.4",
     "symfony/validator": "^4.3",
     "twig/twig": "^2.11",
-    "fzaninotto/faker": "^1.8",
-    "phpstan/phpstan": "^0.12.9"
+    "fzaninotto/faker": "^1.8"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.9",
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "captainhook/captainhook": "^5.3"
   },
   "bin": ["codegen"],
   "autoload": {
@@ -22,7 +26,11 @@
   },
   "scripts": {
     "test": [
-      "vendor/bin/phpstan analyse --level 8 -c phpstan.neon"
+      "vendor/bin/phpstan analyse --level 8 -c phpstan.neon",
+      "vendor/bin/php-cs-fixer --config=.php_cs.dist fix --verbose --dry-run"
+    ],
+    "fixcs": [
+      "vendor/bin/php-cs-fixer --config=.php_cs.dist fix --verbose"
     ]
   }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Re2bit\Generator\Model;
+
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,5 +45,6 @@ class Translation extends AbstractModel
     ) {
         $this->language = $language;
         $this->name = $name;
-        $this->description = $description;}
+        $this->description = $description;
+    }
 }
