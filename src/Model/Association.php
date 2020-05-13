@@ -15,49 +15,42 @@ class Association extends AbstractModel
      * @Serializer\Type("string")
      * @Assert\Choice(callback={"Re2bit\Generator\Model\Association\Type", "validValues"})
      * @Assert\NotBlank()
-     * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @Serializer\Type("string")
      * @Assert\NotBlank()
-     * @var string
      */
-    public $target;
+    public string $target;
 
     /**
      * @Serializer\Type("bool")
      * @Assert\NotNull()
-     * @var bool
      */
-    public $nullable;
+    public bool $nullable;
 
     /**
      * @Serializer\Type("string")
      * @Assert\Type("string")
-     * @var string
      */
-    public $role;
+    public string $role;
 
     /**
      * @Serializer\Type("string")
      * @Assert\Type("string")
-     * @var string
      */
-    public $inverse;
+    public string $inverse;
 
     /**
      * @Serializer\Exclude()
-     * @var Module
      */
-    public $module;
+    public Module $module;
 
     /**
      * @Serializer\Exclude()
-     * @var ResourceModel
      */
-    public $resource;
+    public ResourceModel $resource;
 
     public function getInverse(): string
     {

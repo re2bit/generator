@@ -12,44 +12,41 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ResourceModel extends AbstractModel
 {
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $name;
+    public string $name;
 
     /**
-     * @var string
      * @Assert\Choice(callback={"Re2bit\Generator\Model\Resource\Db", "validValues"})
      * @Serializer\Type("string")
      */
-    public $db;
+    public string $db;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $icon;
+    public string $icon;
 
     /**
      * @var ArrayCollection<int, Association>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Association>")
      */
-    public $associations;
+    public ArrayCollection $associations;
 
     /**
      * @var ArrayCollection<int, Action>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Field>")
      */
-    public $fields;
+    public ArrayCollection $fields;
 
     /**
      * @var ArrayCollection<int, Action>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Action>")
      */
-    public $actions;
+    public ArrayCollection $actions;
 }

@@ -2,6 +2,7 @@
 
 namespace Re2bit\Generator\Twig;
 
+use RuntimeException;
 use Symfony\Component\Console\Output\OutputInterface;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -14,15 +15,9 @@ use Twig\Loader\FilesystemLoader;
  */
 class Renderer
 {
-    /** @var Environment */
-    private $twig;
-
-    /** @var string */
-    private $outputDirectory;
-    /**
-     * @var OutputInterface
-     */
-    private $output;
+    private Environment $twig;
+    private string $outputDirectory;
+    private OutputInterface $output;
 
     public function __construct(
         string $outputDirectory,
@@ -54,9 +49,8 @@ class Renderer
     public function render(string $template, array $variables = []): string
     {
         $twigTpl = $this->twig->load($template);
-        $data = $this->twig->render($twigTpl, $variables);
 
-        return $data;
+        return $this->twig->render($twigTpl, $variables);
     }
 
     /**
@@ -82,7 +76,7 @@ class Renderer
             }
             $dir = $baseDir . DIRECTORY_SEPARATOR . $key;
             if (!is_dir($dir) && !mkdir($dir) && !is_dir($dir)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
+                throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
             }
             $this->renderToFilesystem($value, $baseDir . DIRECTORY_SEPARATOR . $key);
         }

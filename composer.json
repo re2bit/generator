@@ -2,7 +2,7 @@
   "name": "re2bit/generator",
   "description": "Code Gen",
   "require": {
-    "php": "^7.2",
+    "php": "^7.4",
     "doctrine/annotations": "^1.6",
     "doctrine/collections": "^1.6",
     "doctrine/inflector": "^1.3",

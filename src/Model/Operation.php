@@ -15,43 +15,38 @@ class Operation extends AbstractModel
      * @Serializer\Type("string")
      * @Assert\Choice(callback={"Re2bit\Generator\Model\Operation\Type", "validValues"})
      * @Assert\NotBlank()
-     * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @Serializer\Type("boolean")
      * @Assert\IsTrue()
-     * @var bool
      */
-    public $async;
+    public bool $async;
 
     /**
      * @Serializer\Type("string")
      * @Assert\NotBlank()
-     * @var string
      */
-    public $resource;
+    public string $resource;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $name;
+    public string $name;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()
      * @Serializer\Type("string")
      */
-    public $description;
+    public string $description;
 
     /**
      * @var ArrayCollection<int, Translation>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Translation>")
      */
-    public $translations;
+    public ArrayCollection $translations;
 }

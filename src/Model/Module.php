@@ -17,32 +17,30 @@ class Module extends AbstractModel
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Resource>")
      * @Assert\NotNull()
      */
-    public $resources;
+    public ArrayCollection $resources;
 
     /**
      * @var ArrayCollection<int, Operation>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Operation>")
      */
-    public $actions;
+    public ArrayCollection $actions;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $name;
+    public string $name;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Assert\Choice(callback={"Re2bit\Generator\Model\Module\Layout", "validValues"})
      * @Serializer\Type("string")
      */
-    public $layout;
+    public string $layout;
 
     /** @var Namensraum */
-    public $namespace;
+    public Namensraum $namespace;
 
     /**
      * Module constructor.
@@ -63,7 +61,6 @@ class Module extends AbstractModel
 
     /**
      * @Serializer\PostDeserialize()
-     * @return void
      * @internal
      */
     public function postDeserialize(): void

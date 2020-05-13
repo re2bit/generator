@@ -11,25 +11,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Translation extends AbstractModel
 {
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $language;
+    public string $language;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $name;
+    public string $name;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $description;
+    public string $description;
 
     /**
      * Translation constructor.

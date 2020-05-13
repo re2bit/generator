@@ -15,7 +15,7 @@ abstract class AbstractCommand extends Command
     private const INPUT_OPTION_CONFIG_FILE_SHORT = 'c';
 
     /** @var array<string,string> */
-    protected $adapters;
+    protected array $adapters;
 
     /**
      * Config
@@ -39,21 +39,12 @@ abstract class AbstractCommand extends Command
         return include realpath($file);
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return void
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->adapters = $this->createAdapterConfig($input);
     }
 
-    /**
-     * @return void
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $option = new InputOption(
             self::INPUT_OPTION_CONFIG_FILE,

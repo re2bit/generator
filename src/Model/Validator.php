@@ -11,17 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Validator extends AbstractModel
 {
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $type;
+    public string $type;
 
-    /**
-     * Validator constructor.
-     *
-     * @param string $type
-     */
     public function __construct(string $type)
     {
         $this->type = $type;

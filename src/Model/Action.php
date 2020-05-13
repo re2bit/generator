@@ -14,14 +14,12 @@ class Action extends AbstractModel
      * @Serializer\Type("string")
      * @Assert\Choice(callback={"Re2bit\Generator\Model\Action\Type", "validValues"})
      * @Assert\NotBlank()
-     * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @Serializer\Type("string")
      * @Assert\NotBlank(allowNull=true)
-     * @var string
      */
-    public $path;
+    public string $path;
 }

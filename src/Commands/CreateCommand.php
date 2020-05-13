@@ -27,15 +27,11 @@ class CreateCommand extends AbstractCommand
 
     protected static $defaultName = 'generator:create';
 
-    /** @var SerializerInterface */
-    private $serializer;
+    private SerializerInterface $serializer;
     /** @var RecursiveValidator|ValidatorInterface */
     private $validator;
 
-    /**
-     * @return void
-     */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -49,10 +45,8 @@ class CreateCommand extends AbstractCommand
         $inputDefinition->addOption($option);
     }
 
-    protected function execute(
-        InputInterface $input,
-        OutputInterface $output
-    ) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $output->write($this->getLogo());
         $output->writeln('');
 
@@ -100,8 +94,9 @@ class CreateCommand extends AbstractCommand
 
     /**
      * @inheritDoc
+     * @throws AnnotationException
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->serializer = $this->createSerializer();
         $this->validator = $this->createValidator();
@@ -111,7 +106,6 @@ class CreateCommand extends AbstractCommand
     /**
      * Validator Factory Method
      *
-     * @throws AnnotationException
      * @return RecursiveValidator|ValidatorInterface
      */
     private function createValidator()
@@ -123,11 +117,6 @@ class CreateCommand extends AbstractCommand
         )->getValidator();
     }
 
-    /**
-     * Serializer Factory Method
-     *
-     * @return SerializerInterface
-     */
     private function createSerializer(): SerializerInterface
     {
         return SerializerBuilder::create()

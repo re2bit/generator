@@ -20,6 +20,7 @@ class Associations extends ArrayCollection
 
     /**
      * @Assert\Callback()
+     * @param ExecutionContextInterface $context
      */
     public function isValid(ExecutionContextInterface $context): void
     {
@@ -32,7 +33,7 @@ class Associations extends ArrayCollection
                 $context->buildViolation('Association Target for Resource ' . $association->resource->name . ' not present')
                 ->atPath($association->resource->name . ' to ' . $association->target)
                 ->addViolation();
-            };
+            }
         });
     }
 }

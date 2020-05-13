@@ -12,33 +12,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Namensraum extends AbstractModel
 {
     /**
-     * @var string
      * @Assert\Type("string")
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $name;
+    public string $name;
 
     /**
-     * @var bool
      * @Assert\Type("bool")
      * @Assert\NotNull()
      * @Serializer\Type("bool")
      */
-    public $useNamespace;
+    public bool $useNamespace;
 
     /**
      * @var ArrayCollection<int, Module>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Module>")
      */
-    public $modules;
+    public ArrayCollection $modules;
 
     /**
      * @Assert\Valid()
-     * @var Associations
      */
-    private $associationCollection;
+    private Associations $associationCollection;
 
     /**
      * Namensraum constructor.
@@ -55,7 +52,6 @@ class Namensraum extends AbstractModel
 
     /**
      * @Serializer\PostDeserialize()
-     * @return void
      */
     public function init(): void
     {
@@ -65,8 +61,6 @@ class Namensraum extends AbstractModel
 
     /**
      * Associates the Namespace to each Module
-     *
-     * @return void
      */
     private function initNamespace(): void
     {

@@ -14,54 +14,50 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Field extends AbstractField
 {
     /**
-     * @var string
      * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Serializer\Type("string")
      */
-    public $name;
+    public string $name;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Serializer\Type("string")
      */
-    public $type;
+    public string $type;
 
     /**
      * @var ArrayCollection<int, Validator>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Validator>")
      */
-    public $validators;
+    public ArrayCollection $validators;
 
     /**
-     * @var bool
      * @Assert\Type(type="bool")
      * @Serializer\Type("bool")
      */
-    public $nullable;
+    public bool $nullable;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()
      * @Serializer\Type("string")
      */
-    public $description;
+    public string $description;
 
     /**
      * @var ArrayCollection<int, Translation>
      * @Assert\Valid()
      * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Translation>")
      */
-    public $translations;
+    public ArrayCollection $translations;
 
     /**
-     * @var bool
      * @Assert\Type(type="bool")
      * @Serializer\Type("bool")
      */
-    private $disabledInGrid;
+    private bool $disabledInGrid;
 
     /**
      * Field constructor.
@@ -92,9 +88,6 @@ class Field extends AbstractField
         $this->disabledInGrid = $disabledInGrid;
     }
 
-    /**
-     * @return bool
-     */
     public function isId(): bool
     {
         return $this->type === 'pk';
