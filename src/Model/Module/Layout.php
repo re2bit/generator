@@ -7,7 +7,7 @@ namespace Re2bit\Generator\Model\Module;
  */
 class Layout
 {
-    const TAB = 'tab';
+    public const TAB = 'tab';
 
     /**
      * @return array<string>

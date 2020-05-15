@@ -12,7 +12,7 @@ class ClearCommand extends AbstractCommand
     protected function execute(
         InputInterface $input,
         OutputInterface $output
-    ) {
+    ): ?int {
         $output->write($this->getLogo());
         $output->writeln('clear Output');
         foreach ($this->adapters as $adapter => $outputPath) {

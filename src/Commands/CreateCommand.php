@@ -2,7 +2,6 @@
 
 namespace Re2bit\Generator\Commands;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationReader;
 use DomainException;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
@@ -45,7 +44,7 @@ class CreateCommand extends AbstractCommand
         $inputDefinition->addOption($option);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->write($this->getLogo());
         $output->writeln('');
@@ -94,7 +93,6 @@ class CreateCommand extends AbstractCommand
 
     /**
      * @inheritDoc
-     * @throws AnnotationException
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {

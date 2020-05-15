@@ -24,13 +24,15 @@ class Associations extends ArrayCollection
      */
     public function isValid(ExecutionContextInterface $context): void
     {
-        $resources = $this->map(function (Association $association) {
+        $resources = $this->map(static function (Association $association) {
             return $association->resource->name . '-' . $association->type;
         });
-        $this->map(function (Association $association) use ($resources, $context) {
+        $this->map(static function (Association $association) use ($resources, $context) {
             $inverse = $association->target . '-' . $association->getInverse();
             if (!$resources->contains($inverse)) {
-                $context->buildViolation('Association Target for Resource ' . $association->resource->name . ' not present')
+                $context->buildViolation(
+                    'Association Target for Resource ' . $association->resource->name . ' not present'
+                )
                 ->atPath($association->resource->name . ' to ' . $association->target)
                 ->addViolation();
             }

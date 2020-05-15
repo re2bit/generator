@@ -60,9 +60,8 @@ class Renderer
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @return void
      */
-    public function renderToFilesystem(array $fileSystem, $baseDir = null)
+    public function renderToFilesystem(array $fileSystem, $baseDir = null): void
     {
         $baseDir = $baseDir ?? $this->outputDirectory;
         foreach ($fileSystem as $key => $value) {

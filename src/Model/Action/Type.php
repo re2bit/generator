@@ -7,13 +7,13 @@ namespace Re2bit\Generator\Model\Action;
  */
 class Type
 {
-    const INDEX = 'index';
-    const UPDATE = 'update';
-    const SHOW = 'show';
-    const DELETE = 'delete';
-    const CREATE = 'create';
-    const MASS_UPDATE = 'mass_update';
-    const MASS_DELETE = 'mass_delete';
+    public const INDEX = 'index';
+    public const UPDATE = 'update';
+    public const SHOW = 'show';
+    public const DELETE = 'delete';
+    public const CREATE = 'create';
+    public const MASS_UPDATE = 'mass_update';
+    public const MASS_DELETE = 'mass_delete';
 
     /**
      * @return array<string>

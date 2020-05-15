@@ -220,7 +220,7 @@ class Field
      */
     public static function removePk(ArrayCollection $fields): Collection
     {
-        return $fields->filter(function (BaseField $field) {
+        return $fields->filter(static function (BaseField $field) {
             return $field->type !== 'pk';
         });
     }
@@ -232,7 +232,7 @@ class Field
      */
     public static function removeDates(ArrayCollection $fields): Collection
     {
-        return $fields->filter(function (BaseField $field) {
+        return $fields->filter(static function (BaseField $field) {
             return $field->name !== 'created' && $field->name !== 'updated';
         });
     }
@@ -244,7 +244,7 @@ class Field
      */
     public static function removeNullable(ArrayCollection $validators): Collection
     {
-        return $validators->filter(function (Validator $validator) {
+        return $validators->filter(static function (Validator $validator) {
             return $validator->type !== 'null';
         });
     }
