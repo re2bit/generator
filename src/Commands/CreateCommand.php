@@ -72,6 +72,9 @@ class CreateCommand extends AbstractCommand
 
         foreach ($namespace->modules as $module) {
             foreach ($this->adapters as $class => $outputDir) {
+                if (!class_exists($class)) {
+                    throw new DomainException("Autoload of Class '{$class}' failed");
+                }
                 /** @var GeneratorInterface $generator */
                 $generator = new $class(
                     $module,

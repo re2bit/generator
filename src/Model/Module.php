@@ -14,7 +14,7 @@ class Module extends AbstractModel
     /**
      * @var ArrayCollection<int, ResourceModel>
      * @Assert\Valid()
-     * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\Resource>")
+     * @Serializer\Type("ArrayCollection<Re2bit\Generator\Model\ResourceModel>")
      * @Assert\NotNull()
      */
     public ArrayCollection $resources;
